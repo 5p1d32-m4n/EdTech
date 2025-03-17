@@ -2,12 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 // Imported routes
-const authRoutes = require("./routes/");
-const courseRoutes = require("./routes/");
-const lessonRoutes = require("./routes/");
-const enrollmentRoutes = require("./routes/");
-const reviewRoutes = require("./routes/");
-const adminRoutes = require("./routes/");
+const authRoutes = require("./routes/authRoutes");
+const courseRoutes = require("./routes/courseRoutes");
+const lessonRoutes = require("./routes/lessonRoutes");
+const enrollmentRoutes = require("./routes/enrollmentRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 // Imported middlewares
 const errorMiddleware = require("./middlewares/errorMiddleware");
 
@@ -25,8 +25,8 @@ app.use(cors(corsOptions));
 
 
 // Route config
-app.get("/api", (req, res)=>{
-    res.json({test: ["this", "is", "a", "test"]});
+app.get("/api", (req, res) => {
+    res.json({ test: ["this", "is", "a", "test"] });
 })
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
