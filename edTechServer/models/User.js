@@ -1,21 +1,44 @@
 const { pool } = require("../config/db");
 
 const User = {
-    create: async(username, email, passwordHash) => {
+    create: async (username, email, passwordHash) => {
         const query = `
             INSERT INTO user (username, email, passwordHash)
             VALUES ($1, $2, $3)
             RETURNING *;
         `;
         const values = [username, email, passwordHash];
-        const {rows} = await pool.query(query, values);
+        const { rows } = await pool.query(query, values);
         return rows[0];
     },
 
-    findByEmail: async(email)=>{
-        const query = `SELECT * FROM users WHERE email = $1`;
-        const {rows} = await pool.query(query, [email]);
+    findAll: async () => {
+        const query = `SELECT * FROM users WHERE deleted`;
+        const { rows } = await pool.query(query);
+        return rows;
+    },
+
+    findById: async (userId) => {
+        const { row } = await pool.query(`SELECT * FROM users WHERE user_id = $1;`, [userId]);
+        return row[0];
+    },
+
+    update: async (userId, { username, email, role }) => {
+        const { rows } = await pool.query(
+            `UPDATE users SET username = $1, email = $2, role = $3 WHERE user_id = $4 RETURNING *;`,
+            [username, email, role, userId]
+        );
         return rows[0];
+    },
+
+    findByEmail: async (email) => {
+        const query = `SELECT * FROM users WHERE email = $1`;
+        const { rows } = await pool.query(query, [email]);
+        return rows[0];
+    },
+
+    delete: async (userId) => {
+        await pool.query(`DELETE FROM users WHERE user_id = $1;`, [userId]);
     }
 }
 
