@@ -30,9 +30,9 @@ app.get("/api", (req, res) => {
 })
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
-app.use('/api/lessons', lessonRoutes);
-app.use('/api/enrollments', enrollmentRoutes);
-app.use('/api/reviews', reviewRoutes);
+// app.use('/api/lessons', lessonRoutes);
+// app.use('/api/enrollments', enrollmentRoutes);
+// app.use('/api/reviews', reviewRoutes);
 app.use('/api/admin', adminRoutes);
 
 // Error handling middleware
