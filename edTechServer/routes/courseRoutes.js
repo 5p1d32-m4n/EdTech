@@ -15,9 +15,9 @@ router.use(authenticate);
 // Instructor only routes
 router.post('/', authorize(['instructor']), validateCourse, courseController.createCourse);
 router.put('/:courseId', authorize(['instructor']), validateCourse, courseController.updateCourse);
-router.delete('/:courseId', authenticate(['instructor']), courseController.deleteCourse);
+router.delete('/:courseId', authorize(['instructor']), courseController.deleteCourse);
 
 // Students only routes
-router.post('/:courseId/enroll', authenticate(['student']), courseController.enrollCourse);
+router.post('/:courseId/enroll', authorize(['student']), courseController.enrollCourse);
 
 module.exports = router;
