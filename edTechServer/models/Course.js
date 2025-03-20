@@ -40,6 +40,11 @@ const Course = {
         `;
         const values = [status, course_id]
         const {rows} = await pool.query(query, values);
+        return rows[0];
+    },
+
+    delete: async(course_id)=>{
+        await pool.query('DELETE FROM courses WHERE course_id = $1', [course_id]);
     }
 
 }
