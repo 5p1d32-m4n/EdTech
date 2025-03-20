@@ -1,4 +1,5 @@
 const Course = require("../models/Course");
+const Enrollment = require("../models/Enrollment");
 
 const getAllCourses = async (req, res, next) => {
     try {
@@ -89,4 +90,23 @@ const approvedCourse = async (req, res, next) => {
     }
 }
 
-module.exports = { getAllCourses, getCourseById, createCourse, deleteCourse, updateCourse, approvedCourse };
+// Enroll in a course
+const enrollCourse = async(req, res, next) =>{
+    try {
+        const {courseId} = req.params;
+        const studentId = req.user.userId; // This is the authed user (different for admin)
+
+        // Check if the student is already enrolled.
+        const existingEnrollment = await Enrollment.create(studentId, courseId);
+        if(existingEnrollment){
+            return res.status(400).json({message: 'Already enrolled in this course'});
+        }
+
+        const enrollment = await Enrollment.create(studentId, courseId);
+        res.status(201).json(enrollment);
+    } catch (err) {
+        next(err)
+    }
+}
+
+module.exports = { getAllCourses, getCourseById, createCourse, deleteCourse, updateCourse, approvedCourse, enrollCourse };
