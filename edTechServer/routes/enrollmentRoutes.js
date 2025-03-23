@@ -11,3 +11,5 @@ router.use(authenticate);
 // Student routes
 router.post('/enrollments/:courseId/enroll', authorize(['students']), enrollmentController.enrollInCourse);
 router.get('/enrollments', authorize(['students']), enrollmentController.viewEnrollments);
+
+module.exports = router;
