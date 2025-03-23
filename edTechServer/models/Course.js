@@ -10,6 +10,7 @@ const Course = {
         const values = [title, description, category, status];
         const { rows } = await pool.query(query, values);
         rows[0];
+        return rows[0];
     },
 
     findById: async (course_id) => {
