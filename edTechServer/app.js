@@ -1,6 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
+// Swagger config
+const swaggerSetup = require("./swagger");
+const swaggerUi = require("swagger-ui-express")
+const swaggerDocument = require("./swagger-output.json");
 // Imported routes
 const authRoutes = require("./routes/authRoutes");
 const courseRoutes = require("./routes/courseRoutes");
@@ -34,6 +38,9 @@ app.use('/api/courses', courseRoutes);
 // app.use('/api/enrollments', enrollmentRoutes);
 // app.use('/api/reviews', reviewRoutes);
 app.use('/api/admin', adminRoutes);
+
+// Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // Error handling middleware
 app.use(errorMiddleware)
