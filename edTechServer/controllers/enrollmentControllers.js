@@ -4,14 +4,14 @@ const Progress = require("../models/Progress");
 // Enroll in a course (student only)
 const enrollInCourse = async (req, res, next) => {
     try {
-        const {courseId} = req.params;
+        const { courseId } = req.params;
         const studentId = req.user.userId;
 
         // check if the student is already enrolled.
         const existingEnrollment = await Enrollment.findByStudentAndCourse(studentId, courseId);
 
-        if(existingEnrollment){
-            return res.status(400).json({message: 'Already enrolled in course.'});
+        if (existingEnrollment) {
+            return res.status(400).json({ message: 'Already enrolled in course.' });
         }
 
         const enrollment = await Enrollment.create(studentId, courseId);
@@ -22,9 +22,9 @@ const enrollInCourse = async (req, res, next) => {
     }
 }
 
-const markLessonCompleted = async(req, res, next) => {
+const markLessonCompleted = async (req, res, next) => {
     try {
-        const {lessonId} = req.params;
+        const { lessonId } = req.params;
         const studentId = req.user.userId; // From authenticated user.
 
         const progress = await Progress.markCompleted(studentId, lessonId);
@@ -35,4 +35,6 @@ const markLessonCompleted = async(req, res, next) => {
     }
 }
 
-module.exports = {markLessonCompleted, enrollInCourse};
+const viewEnrollments = async (req, res, next) => { }
+
+module.exports = { markLessonCompleted, enrollInCourse, viewEnrollments };
