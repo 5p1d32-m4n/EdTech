@@ -18,6 +18,6 @@ router.put('/:courseId', authorize(['instructor']), validateCourse, courseContro
 router.delete('/:courseId', authorize(['instructor']), courseController.deleteCourse);
 
 // Students only routes
-router.post('/:courseId/enroll', authorize(['student']), courseController.enrollCourse);
+// router.post('/:courseId/enroll', authorize(['student']), courseController.enrollCourse);
 
 module.exports = router;

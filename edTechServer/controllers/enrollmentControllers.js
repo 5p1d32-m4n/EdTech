@@ -35,6 +35,15 @@ const markLessonCompleted = async (req, res, next) => {
     }
 }
 
-const viewEnrollments = async (req, res, next) => { }
+const viewEnrollments = async (req, res, next) => {
+    try {
+        const {studentId} = req.user.userId; // From the authenticated user.
+        const [enrollments] = await Enrollment.findByStudent(studentId);
+
+        res.status(200).json(enrollments);
+    } catch (err) {
+        next(err);
+    }
+}
 
 module.exports = { markLessonCompleted, enrollInCourse, viewEnrollments };

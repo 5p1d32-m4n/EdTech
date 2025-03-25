@@ -1,13 +1,13 @@
 const { pool } = require("../config/db");
 
 const User = {
-    create: async (username, email, passwordHash) => {
+    create: async (username, email, passwordHash, role='student') => {
         const query = `
-            INSERT INTO user (username, email, passwordHash)
-            VALUES ($1, $2, $3)
+            INSERT INTO user (username, email, passwordHash, role)
+            VALUES ($1, $2, $3, $4)
             RETURNING *;
         `;
-        const values = [username, email, passwordHash];
+        const values = [username, email, passwordHash, role];
         const { rows } = await pool.query(query, values);
         return rows[0];
     },

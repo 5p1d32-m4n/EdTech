@@ -1,5 +1,6 @@
 const User = require('../models/User.js');
 const {generateToken} = require("../services/authService.js");
+const {hashPassword, comparePassword} = require("../utils/password.js");
 
 const signup = async(req, res, next) =>{
     try {
