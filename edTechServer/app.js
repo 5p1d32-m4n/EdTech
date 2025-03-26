@@ -22,7 +22,8 @@ const app = express();
 
 // Middleware Confib
 const corsOptions = {
-    origin: `http://${process.env.APP_HOST}:${process.env.PORT}`
+    origin: ['http://localhost:5030', 'http://localhost:3000'], // Add your Swagger UI port
+    credentials: true
 }
 app.use(express.json());
 app.use(morgan('dev'));
