@@ -14,6 +14,7 @@ const reviewRoutes = require("./routes/reviewRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 // Imported middlewares
 const errorMiddleware = require("./middlewares/errorMiddleware");
+require("dotenv").config();
 
 
 const app = express();
@@ -21,7 +22,7 @@ const app = express();
 
 // Middleware Confib
 const corsOptions = {
-    origin: "http://localhost:5173"
+    origin: `http://${process.env.APP_HOST}:${process.env.PORT}`
 }
 app.use(express.json());
 app.use(morgan('dev'));
