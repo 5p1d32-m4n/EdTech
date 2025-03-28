@@ -3,7 +3,7 @@ const { pool } = require("../config/db");
 const User = {
     create: async (username, email, passwordHash, role='student') => {
         const query = `
-            INSERT INTO user (username, email, passwordHash, role)
+            INSERT INTO users (username, email, password_hash, role)
             VALUES ($1, $2, $3, $4)
             RETURNING *;
         `;

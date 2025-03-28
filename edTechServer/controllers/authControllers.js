@@ -19,9 +19,11 @@ const login = async(req, res, next)=>{
         const {email, password} = req.body;
         const user = await User.findByEmail(email);
 
+        // Doing this in one validation to make sure you can't probe for usernames, or passwords.
         if(!user || !(await comparePassword(password, user.password_hash))){
             return res.status(401).json({ message: 'Invalid user credentials'});
         }
+
         const token = generateToken(user.user_id);
         res.status(200).json({ token });
     } catch (err) {
