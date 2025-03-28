@@ -7,7 +7,7 @@ const hashPassword = async (plainTextPassword) => {
 }
 
 const comparePassword = async (plainTextPassword, hashedPassword) => {
-    if (!plainTextPassword || hashedPassword) {
+    if (!plainTextPassword || !hashedPassword) {
         throw new Error('Missing password or hash for comparison.');
     }
     try {

@@ -1,6 +1,6 @@
 const express = require("express");
-const courseController = require("../controllers/courseControllers");
 const { authenticate, authorize } = require("../middlewares/authMiddlewares");
+const courseController = require("../controllers/courseControllers");
 const { validateCourse } = require("../middlewares/validators");
 
 const router = express.Router();
@@ -13,9 +13,9 @@ router.get('/:courseId', courseController.getCourseById);
 router.use(authenticate);
 
 // Instructor only routes
-router.post('/', authorize(['instructor']), validateCourse, courseController.createCourse);
+router.post('/', authorize(['instructor', 'admin']), validateCourse, courseController.createCourse);
 router.put('/:courseId', authorize(['instructor']), validateCourse, courseController.updateCourse);
-router.delete('/:courseId', authorize(['instructor']), courseController.deleteCourse);
+router.delete('/:courseId', authorize(['admin']), courseController.deleteCourse);
 
 // Students only routes
 // router.post('/:courseId/enroll', authorize(['student']), courseController.enrollCourse);

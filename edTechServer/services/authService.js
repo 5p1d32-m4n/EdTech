@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const generateToken = (userId) => {
     // Validate inputs
-    if(!userId || process.env.JWT_SECRET){
+    if(!userId || !process.env.JWT_SECRET){
         throw new Error('Missing required parameters for JWT generations.')
     }
 
