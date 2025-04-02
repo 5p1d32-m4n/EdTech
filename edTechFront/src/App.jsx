@@ -1,13 +1,26 @@
 import { useState, useEffect } from 'react'
 import axios from "axios";
 import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Login from "./pages/Login";
+import PrivateRoute from './components/PrivateRoute';
+import Course from "./pages/Courses";
+import Home from './pages/Home';
 
 function App() {
 
   return (
-    <>
-    <h1>hellos</h1>
-    </>
+    <BrowserRouter>
+    <Navbar />
+      <main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/courses" element={<PrivateRoute><Course /></PrivateRoute>} />
+      </Routes>
+      </main>
+    </BrowserRouter>
   )
 }
 
