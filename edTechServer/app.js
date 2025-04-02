@@ -18,11 +18,14 @@ const app = express();
 
 // Middleware Confib
 const corsOptions = {
-    origin: ['http://localhost:5030', 'http://localhost:3000'], // Add your Swagger UI port
+    origin: 'http://localhost:5173', // for cors origin policies (address for front end if the api and front end share the same server)
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }
 app.use(express.json());
 app.use(morgan('dev'));
+app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
 
 
@@ -30,7 +33,7 @@ app.use(cors(corsOptions));
 app.get("/api", (req, res) => {
     res.json({ test: ["this", "is", "a", "test"] });
 })
-app.use('/api/auth', authRoutes);
+app.use('/api', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/enrollments', enrollmentRoutes);
 // app.use('/api/lessons', lessonRoutes);
