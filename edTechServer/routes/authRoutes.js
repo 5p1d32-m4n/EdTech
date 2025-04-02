@@ -5,12 +5,12 @@ const { validateSignup, validateLogin } = require('../middlewares/validators');
 const router = express.Router();
 
 // Signup route
-router.post('/signup', validateSignup, authController.signup);
+router.post('/auth/signup', validateSignup, authController.signup);
 
 // Login route
-router.post('/login', validateLogin, authController.login);
+router.post('/auth/login', validateLogin, authController.login);
 
 // Logout route (optional, typically handle on the client side.)
-router.post('/logout', authController.logout);
+router.post('/auth/logout', authController.logout);
 
 module.exports = router;
