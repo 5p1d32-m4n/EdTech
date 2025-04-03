@@ -1,0 +1,16 @@
+# docker-compose.test.yml
+version: '3.8'
+services:
+  postgres_test:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: edtech_test
+    ports:
+      - "5433:5432" # Different port than dev
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U testuser -d edtech_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 5

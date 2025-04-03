@@ -43,7 +43,7 @@ const authService = {
   async signup(userData) {
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/auth/signup`, 
+        `${API_BASE_URL}/api/auth/signup`, 
         userData
       );
       

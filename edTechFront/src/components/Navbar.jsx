@@ -26,7 +26,7 @@ function Navbar(){
 
                 {!token ?(
                     <li>
-                        <Link to={"/login"}>Login</Link>
+                        <Link to={"/login"}>Login</Link> or <Link to={"/signup"}>Signup</Link>
                     </li>
                 ):(
                     <li>
